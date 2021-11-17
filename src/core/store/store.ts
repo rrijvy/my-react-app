@@ -1,7 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { personApi } from "./queries/getPerson";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [personApi.reducerPath]: personApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(personApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
